@@ -1,0 +1,128 @@
+*{box-sizing: border-box;}
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #faf7f8;
+    color: #29232a;
+    line-height: 1.5;
+}
+
+header{
+    padding: 48px 20px;
+    text-align: center;
+    background: #f3dce5;
+
+}
+
+header h1{
+    margin: 8px 0;
+    color: #71334c;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+main{
+    max-width: 1100px;
+    margin: auto;
+    padding: 28px 20px;
+}
+
+h2{color: #71334c;}
+
+.filtros{
+    display: flex;
+    gap: 14px;
+    align-items: end;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.filtros > div {flex: 1 1 220px; }
+label{
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input, select, button{font: inherit;}
+input, select{
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #aa929d;
+    border-radius: 8px;
+    background: white;
+}
+
+button{
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: #71334c;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover{background: #522037;}
+.limpiar{padding: 12px 0; color: #71334c;}
+.catalogo{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%,250px), 1fr));
+    gap: 24px;
+}
+
+.tarjeta{
+    overflow: hidden;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 4px 16px #00000012;
+}
+
+.tarjeta img{
+    display: block;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 4px 16px #00000012;
+}
+
+.contenido{padding: 20px;}
+.categoria{color: #526a42; font-size: 0.9rem;}
+.precio{
+    color: #71334c;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.registro{
+    margin-top: 40px;
+    padding: 28px;
+    border-radius: 16px;
+    background: white;
+
+}
+
+.formulario{
+    display: grid;
+    gap: 10px;
+    max-width: 550px;
+}
+
+.formulario button{margin-top: 12px;}
+.exito, .error, .vacio{
+    padding: 14px;
+    border-radius: 8px;
+}
+
+
+.exito{background: #e5f2e5; color: #254924;}
+.error{background: #ffe3e3; color: 802323; }
+.vacio{background: #f3e9ce; }
+
+:focus-visible{
+    outline: 3px solid #316f9b;
+    outline-offset: 3px;
+}
+
+footer{
+    padding: 24px;
+    text-align: center;
+    color: #65545d;
+}

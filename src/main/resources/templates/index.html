@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Floristería Jardín</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <header>
+        <p>Flores para cada ocasión</p>
+        <h1>Floristería Jardín</h1>
+        <p>Encuentre un detalle especial para regalar.</p>
+    </header>
+
+    <main>
+        <section aria-labelledby="titulo-catalogo">
+            <h2 id="titulo-catalogo">Nuestros productos</h2>
+
+            <p class="exito" role="status"
+               th:if="${mensaje}" th:text="${mensaje}"></p>
+
+            <p class="error" role="alert"
+               th:if="${error}" th:text="${error}"></p>
+
+            <form class="filtros" th:action="@{/}" method="get">
+                <div>
+                    <label for="buscar">Nombre del producto</label>
+                    <input id="buscar" type="search" name="buscar"
+                           placeholder="Ejemplo: rosas"
+                           th:value="${buscar}">
+                </div>
+
+                <div>
+                    <label for="filtroCategoria">Categoría</label>
+                    <select id="filtroCategoria" name="categoria">
+                        <option value="">Todas</option>
+                        <option th:each="c : ${categorias}"
+                                th:value="${c}" th:text="${c}"
+                                th:selected="${c == categoriaActual}">
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit">Buscar</button>
+                <a class="limpiar" th:href="@{/}">Limpiar filtros</a>
+            </form>
+
+            <p>
+                Productos encontrados:
+                <strong th:text="${#lists.size(productos)}">0</strong>
+            </p>
+
+            <p class="vacio" th:if="${#lists.isEmpty(productos)}">
+                No hay productos que coincidan con la búsqueda.
+            </p>
+
+            <div class="catalogo">
+                <article class="tarjeta"
+                         th:each="producto : ${productos}">
+                    <img th:src="@{/img/{archivo}(archivo=${producto.imagen})}"
+                         th:alt="${producto.nombre}">
+
+                    <div class="contenido">
+                        <span class="categoria"
+                              th:text="${producto.categoria}"></span>
+
+                        <h3 th:text="${producto.nombre}"></h3>
+
+                        <p class="precio"
+                           th:text="'₡ ' + ${#numbers.formatDecimal(
+                           producto.precio, 1, 'COMMA', 2, 'POINT')}">
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="registro"
+                 aria-labelledby="titulo-registro">
+            <h2 id="titulo-registro">Agregar un producto</h2>
+
+            <p>Complete los datos y seleccione una fotografía disponible.</p>
+
+            <form class="formulario"
+                  th:action="@{/productos}" method="post">
+
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text"
+                       maxlength="80" placeholder="Ramo primavera" required>
+
+                <label for="categoria">Categoría</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="">Seleccione una categoría</option>
+                    <option th:each="c : ${categorias}"
+                            th:value="${c}" th:text="${c}"></option>
+                </select>
+
+                <label for="precio">Precio en colones</label>
+                <input id="precio" name="precio" type="number"
+                       min="0.01" step="0.01"
+                       placeholder="15000" required>
+
+                <label for="imagen">Fotografía</label>
+                <select id="imagen" name="imagen" required>
+                    <option th:each="i : ${imagenes}"
+                            th:value="${i}" th:text="${i}"></option>
+                </select>
+
+                <button type="submit">Guardar producto</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Floristería Jardín · Proyecto educativo con Java</p>
+    </footer>
+</body>
+</html>
